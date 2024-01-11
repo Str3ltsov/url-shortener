@@ -41,4 +41,13 @@ class UrlShortenerService
     {
         return env('APP_URL') . ':' . env('APP_PORT') . '/' . $shortUrl->folder . '/' . $shortUrl->hash;
     }
+
+    // Finds and retrieves url from short url record by folder and hash.
+    public final function getUrlFromShortUrlByFolderAndHash(?string $folder, string $hash): string
+    {
+        return ShortUrl::where([
+            'folder' => $folder,
+            'hash' => $hash
+        ])->first()->url;
+    }
 }

@@ -42,4 +42,11 @@ class UrlShortenerController extends Controller
                 ->with('error', env('APP_ENV') === 'local' ? $exception : $exception->getMessage());
         }
     }
+
+    public function show(?string $folder, string $hash): RedirectResponse
+    {
+        $url = $this->service->getUrlFromShortUrlByFolderAndHash($folder, $hash);
+
+        return redirect()->away($url);
+    }
 }
