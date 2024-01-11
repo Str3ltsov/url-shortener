@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UrlShortenerController::class, 'index'])->name('home');
+Route::get('/', [UrlShortenerController::class, 'index'])->name('urlShortener');
+Route::post('/', [UrlShortenerController::class, 'store'])->name('generateShortUrl');
+Route::get('/{folder?}/{hash}', [UrlShortenerController::class, 'show'])->name('redirectToUrl');
