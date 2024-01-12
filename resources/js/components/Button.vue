@@ -3,6 +3,7 @@ export default {
     name: "Button",
     props: {
         name: String,
+        icon: String,
     },
 };
 </script>
@@ -10,6 +11,7 @@ export default {
 <template>
     <div class="section-form-button-container">
         <button type="button" class="section-form-submit-button">
+            <font-awesome-icon icon="fa-solid fa-bolt" class="button-icon" />
             {{ name }}
         </button>
     </div>
@@ -23,11 +25,11 @@ export default {
     padding-top: 20px;
 
     .section-form-submit-button {
-        width: 130px;
         height: 45px;
+        padding-inline: 20px;
         background-color: var(--button-color);
         color: var(--secondary-color);
-        font-size: 0.95rem;
+        font-size: 1rem;
         font-weight: 600;
         border: none;
         box-shadow: 4px 4px var(--box-shadow-color);
@@ -42,6 +44,11 @@ export default {
 
         @media (max-width: 520px) {
             width: 100%;
+        }
+
+        .button-icon {
+            font-size: 1.1rem;
+            filter: invert(100%) saturate(0%);
         }
     }
 }

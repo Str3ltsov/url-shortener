@@ -61,7 +61,6 @@ export default {
         transition: opacity 300ms ease;
     }
 
-    .v-enter-active,
     .v-leave-active {
         transition: opacity 200ms ease;
     }
