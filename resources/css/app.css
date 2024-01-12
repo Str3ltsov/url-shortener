@@ -10,19 +10,21 @@
     --success-color: #43a047;
     --error-color: #dd3333;
 
-    /* Body color */
+    /* Body colors */
     --body-background-color: #332e45;
 
-    /* Main color */
-    --main-background-color: #3f3855;
+    /* Section colors */
+    --section-background-color: #3f3855;
 
     /* Button colors */
-    --primary-button-color: #e2dbff;
-    --primary-button-hover-color: #cdc6e8;
+    --button-color: #e2dbff;
 
     /* Input colors */
-    --input-background-color: #e2dbff;
-    --input-border-color: #1d1d2c;
+    --input-background-color: #f0ecff;
+
+    /* Shadow colors */
+    --text-shadow-color: #201f22;
+    --box-shadow-color: #1d1d2c;
 
     /* Screen sizes */
     --phone-size: 520px;
