@@ -10,6 +10,16 @@ export default {
         InputCheckbox,
         Button,
     },
+    data() {
+        return {
+            showFolderNameInput: false,
+        };
+    },
+    methods: {
+        receiveShowFolderNameInput(showFolderNameInput) {
+            this.showFolderNameInput = showFolderNameInput;
+        },
+    },
 };
 </script>
 
@@ -21,13 +31,21 @@ export default {
             id="url"
             placeholder="https://example.com"
         />
-        <InputCheckbox label="Add folder" name="add-folder" id="add-folder" />
-        <InputText
-            label="Enter your folder name:"
-            name="folder"
-            id="folder"
-            placeholder="(Valid symbols: A-Z, a-z, 0-9, -, _)"
+        <InputCheckbox
+            label="Add folder"
+            name="add-folder"
+            id="add-folder"
+            @showFolderNameInput="receiveShowFolderNameInput"
         />
+        <Transition>
+            <InputText
+                v-if="showFolderNameInput"
+                label="Enter your folder name:"
+                name="folder"
+                id="folder"
+                placeholder="(Valid symbols: A-Z, a-z, 0-9, -, _)"
+            />
+        </Transition>
         <Button name="Generate" />
     </form>
 </template>
@@ -38,5 +56,19 @@ export default {
     flex-direction: column;
     width: 100%;
     gap: 25px;
+
+    .v-enter-active {
+        transition: opacity 300ms ease;
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 200ms ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
 }
 </style>

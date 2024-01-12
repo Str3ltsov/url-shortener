@@ -6,6 +6,17 @@ export default {
         name: String,
         id: String,
     },
+    data() {
+        return {
+            showFolderNameInput: false,
+        };
+    },
+    methods: {
+        sentShowFolderNameInput() {
+            this.showFolderNameInput = !this.showFolderNameInput;
+            this.$emit("showFolderNameInput", this.showFolderNameInput);
+        },
+    },
 };
 </script>
 
@@ -17,6 +28,7 @@ export default {
                 class="section-form-checkbox"
                 :name="name"
                 :id="id"
+                @click="sentShowFolderNameInput"
             />
             <span class="checkbox-icon">&#10003;</span>
             {{ label }}
