@@ -1,10 +1,12 @@
 <script>
 import AppLayout from "../layouts/AppLayout.vue";
+import UrlShortenerForm from "../components/UrlShortenerForm.vue";
 
 export default {
     name: "UrlShortener",
     components: {
         AppLayout,
+        UrlShortenerForm,
     },
 };
 </script>
@@ -17,6 +19,9 @@ export default {
                 Generate a short url from your url.
             </p>
         </div>
+        <section class="section">
+            <UrlShortenerForm />
+        </section>
     </AppLayout>
 </template>
 
@@ -37,5 +42,15 @@ export default {
         font-size: 1.2rem;
         text-shadow: 3px 3px var(--box-shadow-color);
     }
+}
+
+.section {
+    width: clamp(320px, 85vw, 700px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--section-background-color);
+    box-shadow: 10px 10px var(--box-shadow-color);
+    padding: 2.5rem 3rem;
 }
 </style>
