@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UrlShortenerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return inertia()->render('Index');
-});
+Route::get('/', [UrlShortenerController::class, 'index'])->name('urlShortener');
+Route::post('/', [UrlShortenerController::class, 'store'])->name('generateShortUrl');
+Route::get('{folder?}/{hash}', [UrlShortenerController::class, 'show'])->name('redirectToUrl');
