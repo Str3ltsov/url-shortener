@@ -39,6 +39,11 @@ class UrlShortenerService
     // Generates short url.
     public final function generateShortUrl(object $shortUrl): string
     {
+        $folder = $shortUrl->folder;
+
+        if (!$folder || is_null($folder)) {
+            return env('APP_URL') . ':' . env('APP_PORT') . '/' . $shortUrl->hash;
+        }
         return env('APP_URL') . ':' . env('APP_PORT') . '/' . $shortUrl->folder . '/' . $shortUrl->hash;
     }
 
