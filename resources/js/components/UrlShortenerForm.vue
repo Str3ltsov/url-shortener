@@ -46,7 +46,7 @@ export default {
                 placeholder="(Valid symbols: A-Z, a-z, 0-9, -, _)"
             />
         </Transition>
-        <Button name="Generate" />
+        <Button name="Generate" icon="fa-solid fa-bolt" />
     </form>
 </template>
 

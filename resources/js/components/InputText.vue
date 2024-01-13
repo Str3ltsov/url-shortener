@@ -6,6 +6,14 @@ export default {
         name: String,
         id: String,
         placeholder: String,
+        value: {
+            default: "",
+            type: String || Number,
+        },
+        disabled: {
+            default: false,
+            type: Boolean,
+        },
     },
 };
 </script>
@@ -19,6 +27,8 @@ export default {
             :name="name"
             :id="id"
             :placeholder="placeholder"
+            :value="value"
+            :disabled="disabled"
         />
     </div>
 </template>
@@ -36,7 +46,7 @@ export default {
     }
 
     .section-form-text {
-        height: 2.5rem;
+        height: 2.7rem;
         padding-inline: 12px;
         background-color: var(--input-background-color);
         color: var(--secondary-color);

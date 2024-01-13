@@ -11,7 +11,7 @@ export default {
 <template>
     <div class="section-form-button-container">
         <button type="button" class="section-form-submit-button">
-            <font-awesome-icon icon="fa-solid fa-bolt" class="button-icon" />
+            <font-awesome-icon :icon="icon" class="button-icon" />
             {{ name }}
         </button>
     </div>
@@ -22,10 +22,9 @@ export default {
     display: flex;
     justify-content: center;
     width: inherit;
-    padding-top: 20px;
 
     .section-form-submit-button {
-        height: 45px;
+        height: 2.7rem;
         padding-inline: 20px;
         background-color: var(--button-color);
         color: var(--secondary-color);

@@ -1,12 +1,14 @@
 <script>
 import AppLayout from "../layouts/AppLayout.vue";
 import UrlShortenerForm from "../components/UrlShortenerForm.vue";
+import UrlShortenerResult from "../components/UrlShortenerResult.vue";
 
 export default {
     name: "UrlShortener",
     components: {
         AppLayout,
         UrlShortenerForm,
+        UrlShortenerResult,
     },
 };
 </script>
@@ -21,6 +23,9 @@ export default {
         </div>
         <section class="section">
             <UrlShortenerForm />
+        </section>
+        <section class="section">
+            <UrlShortenerResult />
         </section>
     </AppLayout>
 </template>
