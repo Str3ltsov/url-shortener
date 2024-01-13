@@ -13,14 +13,14 @@ export default {
 </script>
 
 <template>
-    <button :type="type" class="section-button">
+    <button :type="type" class="button">
         <font-awesome-icon :icon="icon" class="button-icon" />
         {{ name }}
     </button>
 </template>
 
 <style scoped>
-.section-button {
+.button {
     height: 2.7rem;
     padding-inline: 20px;
     background-color: var(--button-color);

@@ -21,34 +21,29 @@ export default {
 </script>
 
 <template>
-    <div class="section-form-input-container">
-        <label :for="id" class="section-form-checkbox-label">
+    <div class="input-checkbox-container">
+        <label :for="id" class="input-checkbox-label">
             <input
                 type="checkbox"
-                class="section-form-checkbox"
+                class="input-checkbox"
                 :name="name"
                 :id="id"
                 @click="sentShowFolderNameInput"
             />
-            <span class="checkbox-icon">&#10003;</span>
+            <span class="input-checkbox-check-icon">&#10003;</span>
             {{ label }}
         </label>
     </div>
 </template>
 
 <style scoped>
-.section-form-input-container {
+.input-checkbox-container {
     width: inherit;
     display: flex;
     flex-direction: column;
     gap: 12px;
 
-    .section-form-checkbox-label {
-        font-size: 0.95rem;
-        text-shadow: 2.5px 2.5px var(--text-shadow-color);
-    }
-
-    .section-form-checkbox-label {
+    .input-checkbox-label {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -66,7 +61,7 @@ export default {
             background-color: var(--primary-color);
         }
 
-        .section-form-checkbox {
+        .input-checkbox {
             appearance: none;
             -webkit-appearance: none;
             width: 18px;
@@ -84,15 +79,15 @@ export default {
                 opacity: 1;
             }
 
-            &:checked ~ .checkbox-icon {
+            &:checked ~ .input-checkbox-check-icon {
                 opacity: 1;
             }
         }
 
-        .checkbox-icon {
+        .input-checkbox-check-icon {
             opacity: 0;
             position: absolute;
-            top: -10px;
+            top: -9px;
             left: 1px;
             font-size: 1.7rem;
             transition: opacity 50ms linear;

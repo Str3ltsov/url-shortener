@@ -19,11 +19,11 @@ export default {
 </script>
 
 <template>
-    <div class="section-form-input-container">
-        <label :for="id" class="section-form-label">{{ label }}</label>
+    <div class="input-text-container">
+        <label :for="id" class="input-text-label">{{ label }}</label>
         <input
             type="text"
-            class="section-form-text"
+            class="input-text"
             :name="name"
             :id="id"
             :placeholder="placeholder"
@@ -34,18 +34,18 @@ export default {
 </template>
 
 <style scoped>
-.section-form-input-container {
+.input-text-container {
     width: inherit;
     display: flex;
     flex-direction: column;
     gap: 12px;
 
-    .section-form-label {
+    .input-text-label {
         font-size: 0.95rem;
         text-shadow: 2.5px 2.5px var(--text-shadow-color);
     }
 
-    .section-form-text {
+    .input-text {
         height: 2.7rem;
         padding-inline: 12px;
         background-color: var(--input-background-color);
