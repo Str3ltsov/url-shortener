@@ -46,7 +46,9 @@ export default {
                 placeholder="(Valid symbols: A-Z, a-z, 0-9, -, _)"
             />
         </Transition>
-        <Button name="Generate" icon="fa-solid fa-bolt" />
+        <div class="section-form-submit-button-container">
+            <Button type="button" name="Generate" icon="fa-solid fa-bolt" />
+        </div>
     </form>
 </template>
 
@@ -56,6 +58,13 @@ export default {
     flex-direction: column;
     width: 100%;
     gap: 25px;
+
+    .section-form-submit-button-container {
+        display: flex;
+        justify-content: center;
+        width: inherit;
+        margin-top: 20px;
+    }
 
     .v-enter-active {
         transition: opacity 300ms ease;
