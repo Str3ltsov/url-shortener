@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateShortUrlRequest;
 use App\Services\UrlShortenerService;
-use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
 use Exception;
 
 class UrlShortenerController extends Controller
@@ -16,7 +16,7 @@ class UrlShortenerController extends Controller
 
     public function index(): Response
     {
-        return inertia()->render('Home');
+        return inertia()->render('UrlShortener');
     }
 
     public function store(CreateShortUrlRequest $request): RedirectResponse

@@ -44,7 +44,7 @@ class UrlShortenerService
         if (!$folder || is_null($folder)) {
             return env('APP_URL') . ':' . env('APP_PORT') . '/' . $shortUrl->hash;
         }
-        return env('APP_URL') . ':' . env('APP_PORT') . '/' . $shortUrl->folder . '/' . $shortUrl->hash;
+        return env('APP_URL') . ':' . env('APP_PORT') . '/' . $folder . '/' . $shortUrl->hash;
     }
 
     // Finds and retrieves url from short url record by folder and hash.
