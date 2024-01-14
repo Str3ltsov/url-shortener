@@ -21,7 +21,7 @@ class UrlShortenerService
     }
 
     // Finds and retrieves short url record where entered url is already being used.
-    public final function getShortUrlWithUsedUrl(string $url): object
+    public final function getShortUrlWithUsedUrl(string $url): ?object
     {
         return ShortUrl::where('url', $url)->first();
     }

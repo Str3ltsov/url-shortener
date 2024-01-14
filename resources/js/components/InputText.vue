@@ -6,9 +6,9 @@ export default {
         name: String,
         id: String,
         placeholder: String,
-        value: {
+        modelValue: {
             default: "",
-            type: String || Number,
+            type: String,
         },
         disabled: {
             default: false,
@@ -27,8 +27,9 @@ export default {
             :name="name"
             :id="id"
             :placeholder="placeholder"
-            :value="value"
             :disabled="disabled"
+            :value="modelValue"
+            @input="$emit('update:modelValue', $event.target.value)"
         />
     </div>
 </template>
@@ -63,6 +64,11 @@ export default {
         &:focus {
             opacity: 1;
         }
+    }
+
+    .input-text-error {
+        color: var(--error-color);
+        text-shadow: 2px 2px var(--text-shadow-color);
     }
 }
 </style>

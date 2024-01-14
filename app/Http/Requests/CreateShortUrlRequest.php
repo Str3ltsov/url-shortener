@@ -22,7 +22,7 @@ class CreateShortUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'hash' => 'required|string|unique:short_urls,hash',
+            // 'hash' => 'required|string|unique:short_urls,hash',
             'url' => 'required|string|url',
             'folder' => 'nullable|string|alpha_dash:ascii'
         ];
