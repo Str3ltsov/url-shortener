@@ -24,7 +24,7 @@ export default {
         <section class="section">
             <UrlShortenerForm />
         </section>
-        <section v-if="$page.props.flash.shortUrl" class="section">
+        <section v-if="$page.props.shortUrl" class="section">
             <UrlShortenerResult />
         </section>
     </AppLayout>

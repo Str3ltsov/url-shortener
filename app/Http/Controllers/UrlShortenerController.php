@@ -43,7 +43,7 @@ class UrlShortenerController extends Controller
         }
     }
 
-    public function show(?string $folder, string $hash): RedirectResponse
+    public function show(?string $folder = null, string $hash): RedirectResponse
     {
         $url = $this->service->getUrlFromShortUrlByFolderAndHash($folder, $hash);
 

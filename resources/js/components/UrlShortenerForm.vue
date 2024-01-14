@@ -2,7 +2,7 @@
 import InputText from "./InputText.vue";
 import InputCheckbox from "./InputCheckbox.vue";
 import Button from "./Button.vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 export default {
@@ -29,7 +29,10 @@ export default {
                 shortUrlForm.folder = null;
             }
 
-            shortUrlForm.post(route("generateShortUrl"));
+            shortUrlForm.post(route("generateShortUrl"), {
+                onSuccess: () => console.info(usePage().props.flash.success),
+                onError: () => console.error(usePage().props.flash.error),
+            });
         };
 
         return {
@@ -70,7 +73,12 @@ export default {
             />
         </Transition>
         <div class="section-form-submit-button-container">
-            <Button type="submit" name="Generate" icon="fa-solid fa-bolt" />
+            <Button
+                type="submit"
+                :disabled="shortUrlForm.progress"
+                name="Generate"
+                icon="fa-solid fa-bolt"
+            />
         </div>
     </form>
 </template>
