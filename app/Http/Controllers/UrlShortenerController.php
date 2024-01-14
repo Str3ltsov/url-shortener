@@ -39,14 +39,24 @@ class UrlShortenerController extends Controller
                 ]);
         } catch (Exception $exception) {
             return back()
-                ->with('error', env('APP_ENV') === 'local' ? $exception : $exception->getMessage());
+                ->with(
+                    'exception',
+                    env('APP_ENV') === 'local' ? $exception : $exception->getMessage()
+                );
         }
     }
 
-    public function show(?string $folder = null, string $hash): RedirectResponse
+    public function redirectToUrl(string $hash): RedirectResponse
     {
-        $url = $this->service->getUrlFromShortUrlByFolderAndHash($folder, $hash);
+        $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash, null);
 
-        return redirect()->away($url);
+        return redirect()->to($url);
+    }
+
+    public function redirectToUrlWithFolder(string $folder, string $hash): RedirectResponse
+    {
+        $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash, $folder);
+
+        return redirect()->to($url);
     }
 }

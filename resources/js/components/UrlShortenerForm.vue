@@ -31,7 +31,7 @@ export default {
 
             shortUrlForm.post(route("generateShortUrl"), {
                 onSuccess: () => console.info(usePage().props.flash.success),
-                onError: () => console.error(usePage().props.flash.error),
+                onError: () => console.error(usePage().props.flash.exception),
             });
         };
 

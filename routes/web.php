@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UrlShortenerController::class, 'index'])->name('urlShortener');
-Route::post('/', [UrlShortenerController::class, 'store'])->name('generateShortUrl');
-Route::get('/{folder?}/{hash}', [UrlShortenerController::class, 'show'])->name('redirectToUrl');
+Route::get('/', [UrlShortenerController::class, 'index'])
+    ->name('urlShortener');
+Route::post('/', [UrlShortenerController::class, 'store'])
+    ->name('generateShortUrl');
+Route::get('/{hash}', [UrlShortenerController::class, 'redirectToUrl'])
+    ->name('redirectToUrl');
+Route::get('/{folder}/{hash}', [UrlShortenerController::class, 'redirectToUrlWithFolder'])
+    ->name('redirectToUrlWithFolder');
