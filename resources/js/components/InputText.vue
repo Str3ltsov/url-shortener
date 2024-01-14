@@ -14,6 +14,10 @@ export default {
             default: false,
             type: Boolean,
         },
+        error: {
+            default: "",
+            type: String,
+        },
     },
 };
 </script>
@@ -31,6 +35,9 @@ export default {
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
         />
+        <Transition>
+            <span v-if="error" class="input-text-error">{{ error }}</span>
+        </Transition>
     </div>
 </template>
 

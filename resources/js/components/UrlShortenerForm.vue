@@ -50,6 +50,7 @@ export default {
             id="url"
             placeholder="https://example.com"
             v-model="shortUrlForm.url"
+            :error="shortUrlForm.errors.url"
         />
         <InputCheckbox
             label="Add folder"
@@ -65,6 +66,7 @@ export default {
                 id="folder"
                 placeholder="(Valid symbols: A-Z, a-z, 0-9, -, _)"
                 v-model="shortUrlForm.folder"
+                :error="shortUrlForm.errors.folder"
             />
         </Transition>
         <div class="section-form-submit-button-container">
