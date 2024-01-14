@@ -28,8 +28,6 @@ class UrlShortenerController extends Controller
 
             if (!$existingShortUrl) {
                 $hash = $this->service->generateRandomHash();
-                dd($hash);
-
                 $this->service->createShortUrl($hash, $validInputs);
                 $existingShortUrl = $this->service->getShortUrlWithUsedUrl($validInputs['url']);
             }

@@ -17,7 +17,7 @@ export default {
                     name="short_url"
                     id="short_url"
                     placeholder="https://example.com/folder/[hash]"
-                    value="https://example.com/folder/[hash]"
+                    :value="$page.props.flash.shortUrl"
                     disabled
                 />
                 <button type="button" class="section-result-copy-button">

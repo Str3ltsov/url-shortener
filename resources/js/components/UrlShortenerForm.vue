@@ -15,14 +15,14 @@ export default {
     setup() {
         const showFolderNameInput = ref(false);
 
-        const toggleShowFolderNameInput = () => {
-            showFolderNameInput.value = !showFolderNameInput.value;
-        };
-
         const shortUrlForm = useForm({
             url: null,
             folder: null,
         });
+
+        const toggleShowFolderNameInput = () => {
+            showFolderNameInput.value = !showFolderNameInput.value;
+        };
 
         const postGenerateShortUrl = () => {
             if (!showFolderNameInput.value) {
@@ -34,8 +34,8 @@ export default {
 
         return {
             showFolderNameInput,
-            toggleShowFolderNameInput,
             shortUrlForm,
+            toggleShowFolderNameInput,
             postGenerateShortUrl,
         };
     },
