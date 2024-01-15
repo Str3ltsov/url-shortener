@@ -24,9 +24,11 @@ export default {
         <section class="section">
             <UrlShortenerForm />
         </section>
-        <section v-if="$page.props.shortUrl" class="section">
-            <UrlShortenerResult />
-        </section>
+        <Transition>
+            <section v-if="$page.props.shortUrl" class="section">
+                <UrlShortenerResult />
+            </section>
+        </Transition>
     </AppLayout>
 </template>
 

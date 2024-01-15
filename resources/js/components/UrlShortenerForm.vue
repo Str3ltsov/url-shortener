@@ -30,7 +30,10 @@ export default {
             }
 
             shortUrlForm.post(route("generateShortUrl"), {
-                onSuccess: () => console.info(usePage().props.flash.success),
+                onSuccess: () => {
+                    shortUrlForm.reset("url", "folder");
+                    console.info(usePage().props.flash.success);
+                },
                 onError: () => console.error(usePage().props.flash.exception),
             });
         };
@@ -75,7 +78,7 @@ export default {
         <div class="section-form-submit-button-container">
             <Button
                 type="submit"
-                :disabled="shortUrlForm.progress"
+                :disabled="shortUrlForm.processing"
                 name="Generate"
                 icon="fa-solid fa-bolt"
             />
