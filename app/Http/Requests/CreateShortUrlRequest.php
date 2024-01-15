@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\UrlSafeForBrowsing;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateShortUrlRequest extends FormRequest
@@ -23,7 +24,7 @@ class CreateShortUrlRequest extends FormRequest
     {
         return [
             // 'hash' => 'required|string|unique:short_urls,hash',
-            'url' => 'required|string|url',
+            'url' => ['required', 'string', 'url', new UrlSafeForBrowsing],
             'folder' => 'nullable|string|alpha_dash:ascii'
         ];
     }

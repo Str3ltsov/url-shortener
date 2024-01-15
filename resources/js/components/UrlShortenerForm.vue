@@ -34,7 +34,6 @@ export default {
                     shortUrlForm.reset("url", "folder");
                     console.info(usePage().props.flash.success);
                 },
-                onError: () => console.error(usePage().props.flash.exception),
             });
         };
 
