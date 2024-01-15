@@ -14,11 +14,13 @@ class UrlShortenerController extends Controller
     {
     }
 
+    // UrlShorter vue page.
     public function index(): Response
     {
         return inertia()->render('UrlShortener');
     }
 
+    // Storing short url record and generating short url.
     public function store(CreateShortUrlRequest $request): RedirectResponse
     {
         $validInputs = $request->validated();
@@ -26,6 +28,9 @@ class UrlShortenerController extends Controller
         try {
             $existingShortUrl = $this->service->getShortUrlWithUsedUrl($validInputs['url']);
 
+            if ($existingShortUrl && $existingShortUrl->folder !== $validInputs['folder']) {
+                $this->service->updateShortUrlFolder($existingShortUrl, $validInputs['folder']);
+            }
             if (!$existingShortUrl) {
                 $hash = $this->service->generateRandomHash();
                 $this->service->createShortUrl($hash, $validInputs);
@@ -39,14 +44,40 @@ class UrlShortenerController extends Controller
                 ]);
         } catch (Exception $exception) {
             return back()
-                ->with('error', env('APP_ENV') === 'local' ? $exception : $exception->getMessage());
+                ->with(
+                    'exception',
+                    env('APP_ENV') === 'local' ? $exception : $exception->getMessage()
+                );
         }
     }
 
-    public function show(?string $folder, string $hash): RedirectResponse
+    // Redirecting to url using short url with hash.
+    public function redirectToUrl(string $hash): RedirectResponse
     {
-        $url = $this->service->getUrlFromShortUrlByFolderAndHash($folder, $hash);
+        try {
+            $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash);
+            return redirect()->to($url);
+        } catch (Exception $exception) {
+            return back()
+                ->with(
+                    'exception',
+                    env('APP_ENV') === 'local' ? $exception : $exception->getMessage()
+                );
+        }
+    }
 
-        return redirect()->away($url);
+    // Redirecting to url using short url with folder and hash.
+    public function redirectToUrlWithFolder(string $folder, string $hash): RedirectResponse
+    {
+        try {
+            $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash, $folder);
+            return redirect()->to($url);
+        } catch (Exception $exception) {
+            return back()
+                ->with(
+                    'exception',
+                    env('APP_ENV') === 'local' ? $exception : $exception->getMessage()
+                );
+        }
     }
 }

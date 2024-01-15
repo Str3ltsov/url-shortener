@@ -21,7 +21,7 @@ class UrlShortenerService
     }
 
     // Finds and retrieves short url record where entered url is already being used.
-    public final function getShortUrlWithUsedUrl(string $url): object
+    public final function getShortUrlWithUsedUrl(string $url): ?object
     {
         return ShortUrl::where('url', $url)->first();
     }
@@ -47,12 +47,19 @@ class UrlShortenerService
         return env('APP_URL') . ':' . env('APP_PORT') . '/' . $folder . '/' . $shortUrl->hash;
     }
 
-    // Finds and retrieves url from short url record by folder and hash.
-    public final function getUrlFromShortUrlByFolderAndHash(?string $folder, string $hash): string
+    // Finds and retrieves url from short url record by hash and folder if present.
+    public final function getUrlFromShortUrlByHashAndFolder(string $hash, ?string $folder = null): string
     {
         return ShortUrl::where([
             'folder' => $folder,
             'hash' => $hash
         ])->first()->url;
+    }
+
+    // Update short url record folder.
+    public final function updateShortUrlFolder(object $shortUrl, ?string $folder = null): void
+    {
+        $shortUrl->folder = $folder;
+        $shortUrl->save();
     }
 }

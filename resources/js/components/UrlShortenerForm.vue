@@ -2,6 +2,8 @@
 import InputText from "./InputText.vue";
 import InputCheckbox from "./InputCheckbox.vue";
 import Button from "./Button.vue";
+import { useForm, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 export default {
     name: "UrlShortenerForm",
@@ -10,32 +12,56 @@ export default {
         InputCheckbox,
         Button,
     },
-    data() {
-        return {
-            showFolderNameInput: false,
+    setup() {
+        const showFolderNameInput = ref(false);
+
+        const shortUrlForm = useForm({
+            url: null,
+            folder: null,
+        });
+
+        const toggleShowFolderNameInput = () => {
+            showFolderNameInput.value = !showFolderNameInput.value;
         };
-    },
-    methods: {
-        receiveShowFolderNameInput(showFolderNameInput) {
-            this.showFolderNameInput = showFolderNameInput;
-        },
+
+        const postGenerateShortUrl = () => {
+            if (!showFolderNameInput.value) {
+                shortUrlForm.folder = null;
+            }
+
+            shortUrlForm.post(route("generateShortUrl"), {
+                onSuccess: () => {
+                    shortUrlForm.reset("url", "folder");
+                    console.info(usePage().props.flash.success);
+                },
+            });
+        };
+
+        return {
+            showFolderNameInput,
+            shortUrlForm,
+            toggleShowFolderNameInput,
+            postGenerateShortUrl,
+        };
     },
 };
 </script>
 
 <template>
-    <form method="post" action="" class="section-form">
+    <form @submit.prevent="postGenerateShortUrl" class="section-form">
         <InputText
             label="Enter your url:"
             name="url"
             id="url"
             placeholder="https://example.com"
+            v-model="shortUrlForm.url"
+            :error="shortUrlForm.errors.url"
         />
         <InputCheckbox
             label="Add folder"
             name="add-folder"
             id="add-folder"
-            @showFolderNameInput="receiveShowFolderNameInput"
+            @checkboxClicked="toggleShowFolderNameInput"
         />
         <Transition>
             <InputText
@@ -44,10 +70,17 @@ export default {
                 name="folder"
                 id="folder"
                 placeholder="(Valid symbols: A-Z, a-z, 0-9, -, _)"
+                v-model="shortUrlForm.folder"
+                :error="shortUrlForm.errors.folder"
             />
         </Transition>
         <div class="section-form-submit-button-container">
-            <Button type="button" name="Generate" icon="fa-solid fa-bolt" />
+            <Button
+                type="submit"
+                :disabled="shortUrlForm.processing"
+                name="Generate"
+                icon="fa-solid fa-bolt"
+            />
         </div>
     </form>
 </template>
@@ -64,19 +97,6 @@ export default {
         justify-content: center;
         width: inherit;
         margin-top: 20px;
-    }
-
-    .v-enter-active {
-        transition: opacity 300ms ease;
-    }
-
-    .v-leave-active {
-        transition: opacity 200ms ease;
-    }
-
-    .v-enter-from,
-    .v-leave-to {
-        opacity: 0;
     }
 }
 </style>

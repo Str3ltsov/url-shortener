@@ -6,6 +6,10 @@ export default {
             default: "button",
             type: String,
         },
+        disabled: {
+            default: false,
+            type: Boolean,
+        },
         name: String,
         icon: String,
     },
@@ -13,7 +17,7 @@ export default {
 </script>
 
 <template>
-    <button :type="type" class="button">
+    <button :type="type" :disabled="disabled" class="button">
         <font-awesome-icon :icon="icon" class="button-icon" />
         {{ name }}
     </button>
@@ -36,6 +40,10 @@ export default {
     &:hover,
     &:focus {
         opacity: 1;
+    }
+
+    &:disabled {
+        opacity: 0.5;
     }
 
     @media (max-width: 520px) {
