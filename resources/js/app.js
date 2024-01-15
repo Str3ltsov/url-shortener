@@ -3,9 +3,9 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from 'ziggy-js';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBolt, faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faClipboard, faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBolt, faClipboard);
+library.add(faBolt, faClipboard, faClipboardCheck);
 
 createInertiaApp({
     resolve: name => {
