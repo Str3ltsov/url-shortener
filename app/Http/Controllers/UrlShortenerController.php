@@ -26,6 +26,9 @@ class UrlShortenerController extends Controller
         try {
             $existingShortUrl = $this->service->getShortUrlWithUsedUrl($validInputs['url']);
 
+            if ($existingShortUrl && $existingShortUrl->folder !== $validInputs['folder']) {
+                $this->service->updateShortUrlFolder($existingShortUrl, $validInputs['folder']);
+            }
             if (!$existingShortUrl) {
                 $hash = $this->service->generateRandomHash();
                 $this->service->createShortUrl($hash, $validInputs);
@@ -48,7 +51,7 @@ class UrlShortenerController extends Controller
 
     public function redirectToUrl(string $hash): RedirectResponse
     {
-        $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash, null);
+        $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash);
 
         return redirect()->to($url);
     }

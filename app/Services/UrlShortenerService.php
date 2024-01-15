@@ -48,13 +48,18 @@ class UrlShortenerService
     }
 
     // Finds and retrieves url from short url record by hash and folder if present.
-    public final function getUrlFromShortUrlByHashAndFolder(
-        string $hash,
-        ?string $folder = null
-    ): string {
+    public final function getUrlFromShortUrlByHashAndFolder(string $hash, ?string $folder = null): string
+    {
         return ShortUrl::where([
             'folder' => $folder,
             'hash' => $hash
         ])->first()->url;
+    }
+
+    // Update short url record folder.
+    public final function updateShortUrlFolder(object $shortUrl, ?string $folder = null): void
+    {
+        $shortUrl->folder = $folder;
+        $shortUrl->save();
     }
 }
