@@ -14,11 +14,13 @@ class UrlShortenerController extends Controller
     {
     }
 
+    // UrlShorter vue page.
     public function index(): Response
     {
         return inertia()->render('UrlShortener');
     }
 
+    // Storing short url record and generating short url.
     public function store(CreateShortUrlRequest $request): RedirectResponse
     {
         $validInputs = $request->validated();
@@ -49,17 +51,33 @@ class UrlShortenerController extends Controller
         }
     }
 
+    // Redirecting to url using short url with hash.
     public function redirectToUrl(string $hash): RedirectResponse
     {
-        $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash);
-
-        return redirect()->to($url);
+        try {
+            $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash);
+            return redirect()->to($url);
+        } catch (Exception $exception) {
+            return back()
+                ->with(
+                    'exception',
+                    env('APP_ENV') === 'local' ? $exception : $exception->getMessage()
+                );
+        }
     }
 
+    // Redirecting to url using short url with folder and hash.
     public function redirectToUrlWithFolder(string $folder, string $hash): RedirectResponse
     {
-        $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash, $folder);
-
-        return redirect()->to($url);
+        try {
+            $url = $this->service->getUrlFromShortUrlByHashAndFolder($hash, $folder);
+            return redirect()->to($url);
+        } catch (Exception $exception) {
+            return back()
+                ->with(
+                    'exception',
+                    env('APP_ENV') === 'local' ? $exception : $exception->getMessage()
+                );
+        }
     }
 }
