@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use App\Models\ShortUrl;
+use Exception;
 
 class UrlShortenerService
 {
     // Generates random alphanumeric hash.
-    public final function generateRandomHash(int $length = 6): string
+    public function generateRandomHash(int $length = 6): string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -21,13 +22,13 @@ class UrlShortenerService
     }
 
     // Finds and retrieves short url record where entered url is already being used.
-    public final function getShortUrlWithUsedUrl(string $url): ?object
+    public function getShortUrlWithUsedUrl(string $url): ?ShortUrl
     {
         return ShortUrl::where('url', $url)->first();
     }
 
     // Creates new short url record.
-    public final function createShortUrl(string $hash, array $validInputs): void
+    public function createShortUrl(string $hash, array $validInputs): void
     {
         ShortUrl::create([
             'hash' => $hash,
@@ -37,7 +38,7 @@ class UrlShortenerService
     }
 
     // Generates short url.
-    public final function generateShortUrl(object $shortUrl): string
+    public function generateShortUrl(object $shortUrl): string
     {
         $folder = $shortUrl->folder;
 
@@ -47,17 +48,26 @@ class UrlShortenerService
         return env('APP_URL') . ':' . env('APP_PORT') . '/' . $folder . '/' . $shortUrl->hash;
     }
 
-    // Finds and retrieves url from short url record by hash and folder if present.
-    public final function getUrlFromShortUrlByHashAndFolder(string $hash, ?string $folder = null): string
+    /**
+     * Finds and retrieves url from short url record by hash and folder if present.
+     * @throws Exception
+     */
+    public function getUrlFromShortUrlByHashAndFolder(string $hash, ?string $folder = null): string
     {
-        return ShortUrl::where([
+        $shortUrl = ShortUrl::where([
             'folder' => $folder,
             'hash' => $hash
-        ])->first()->url;
+        ])->first();
+
+        if (is_null($shortUrl) || !$shortUrl) {
+            throw new Exception('Url not found in database.');
+        }
+
+        return $shortUrl->url;
     }
 
     // Update short url record folder.
-    public final function updateShortUrlFolder(object $shortUrl, ?string $folder = null): void
+    public function updateShortUrlFolder(object $shortUrl, ?string $folder = null): void
     {
         $shortUrl->folder = $folder;
         $shortUrl->save();

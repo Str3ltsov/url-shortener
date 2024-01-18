@@ -22,8 +22,6 @@ class ShortUrl extends Model
     protected $casts = [
         'hash' => 'string',
         'url' => 'string',
-        'folder' => 'string',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'folder' => 'string'
     ];
 }

@@ -32,7 +32,9 @@ export default {
             shortUrlForm.post(route("generateShortUrl"), {
                 onSuccess: () => {
                     shortUrlForm.reset("url", "folder");
-                    console.info(usePage().props.flash.success);
+
+                    const { success, throwable } = usePage().props.flash;
+                    success ? console.info(success) : console.error(throwable);
                 },
             });
         };
